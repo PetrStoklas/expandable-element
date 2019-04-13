@@ -1,14 +1,19 @@
 class ExpandableElement {
-  render(title, text) {
+  constructor(title, text) {
+    this.title = title;
+    this.text = text;
+  }
+
+  render() {
     this.element = document.createElement("div");
     this.element.className = "accordion";
     this.element.innerHTML = (
         `<div class="title-container">
             <img id="arrow" class="arrow closed" src="img/arrow.png" >
-            <h3 class="accordion-title">${title}</h3>
+            <h3 class="accordion-title">${this.title}</h3>
         </div>
         <div id="text-container" class="text-container">
-            <p class="text">${text}</p>
+            <p class="text">${this.text}</p>
             <hr class="bottom-line"></hr>
         </div>`);
 
@@ -30,7 +35,7 @@ class ExpandableElement {
     return this.element;
   }
 
-  mount(where, title, text) {
-    document.querySelector("." + where).appendChild(this.render(title, text));
+  mount(where) {
+    document.querySelector("." + where).appendChild(this.render());
   }
 }
